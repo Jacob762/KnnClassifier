@@ -1,0 +1,1 @@
+Set: test_data_iris.txt Metric: maanhatan Neighbours: 7 Accuracy: 100.0

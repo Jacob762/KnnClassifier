@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -15,11 +16,10 @@ public class KNeighboursClassifier {
     private static int kolumny;
     private static double[][] tabTest;
     private static int[] etykietyTest;
+    private static String somsiad;
 
     public static void dataSet(){
-        Scanner skaner = new Scanner(System.in);
-        System.out.println("Wybierz nazwe zbioru (iris lub cancer):");
-        setname = skaner.nextLine();
+        setname = JOptionPane.showInputDialog("Enter the name of dataset (iris or cancer):");
         if(setname.equals("iris")){
             nazwatest = "test_data_iris.txt";
             nazwatrain = "train_data_iris.txt";
@@ -27,10 +27,9 @@ public class KNeighboursClassifier {
             nazwatest = "test_data_cancer.txt";
             nazwatrain = "train_data_cancer.txt";
         }
-        System.out.println("Podaj metryke (maanhatan lub euclidean)");
-        metric = skaner.nextLine();
-        System.out.println("Podaj liczbe sasiadow:");
-        n_neighbours = skaner.nextInt();
+        metric = JOptionPane.showInputDialog("Enter the name of metric (maanhatan or euclidean)");
+        somsiad = JOptionPane.showInputDialog("Enter the number of neighbours:");
+        n_neighbours = Integer.parseInt(somsiad);
     }
 
     public static void fit(double[][] X_train, int[] Y_train, int kolumny) {
@@ -127,7 +126,6 @@ public class KNeighboursClassifier {
         }
     }
 
-
     public static double calculate_accuracy(double[][] X_test, int[] Y_test) {
         double counter = 0;
         double result;
@@ -178,6 +176,7 @@ public class KNeighboursClassifier {
         predict(tabTest);
         System.out.println();
         dokladnosc=calculate_accuracy(tabTest,etykietyTest);
+        JOptionPane.showMessageDialog(null,"Accuracy: " + dokladnosc);
         save(dokladnosc);
     }
 }
